@@ -4,6 +4,7 @@ import Login from './component/login';
 import { Route, Routes } from 'react-router-dom';
 import Home from './component/Home';
 import User from './component/User';
+import './App.css';
 import Register from './component/register';
 import Notfound from './component/notfound';
 
