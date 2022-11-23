@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link}from 'react-router-dom'
 
-function login() {
+function Login() {
   return (
     <>
    <div className="container text-center my-5">
@@ -24,4 +24,4 @@ function login() {
   )
 }
 
-export default login
+export default Login

@@ -1,12 +1,11 @@
 import React from 'react'
-import Navbar from './component/navbar';
-import Login from './component/login';
+import Navbar from './component/Navbar';
+import Login from './component/Login';
 import { Route, Routes } from 'react-router-dom';
 import Home from './component/Home';
 import User from './component/User';
-import './App.css';
-import Register from './component/register';
-import Notfound from './component/notfound';
+import Register from './component/Register';
+import Notfound from './component/Notfound';
 
 function App() {
   return (

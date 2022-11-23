@@ -1,7 +1,24 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import axios from 'axios';
+import React, { useState } from 'react'
 
-function register() {
+function Register() {
+  let [user,setUser] = useState(
+    {
+      userName:"",
+      email:"",
+      password:"",
+      cpassword:"",
+    }
+  )
+  let getUser = (e)=>{
+    setUser( {...user,[e.target.name]: e.target.value} );
+  }
+  let sendData =async(e)=>{
+    e.preventDefault();
+    let {data} = await axios.post("http://localhost:3000/api/v1/auth/signup",user);
+    console.log(data.message);
+
+  }
   return (
    <>
    <div className="container text-center my-5">
@@ -10,12 +27,12 @@ function register() {
     <h4 className="login">Register</h4>
   </div>
   <div className="card p-5 w-50 m-auto">
-    <form method="POST" action="/handleLogin">
-      <input className="form-control" placeholder="Enter your Name" type="text" name="username" />
-      <input className="form-control my-4 " placeholder="Enter your eamil" type="text" name="email" />
-      <input className="form-control my-4 " placeholder="Enter your Password" type="text" name="password" />
-      <input className="form-control my-4 " placeholder="Enter Confirm Password" type="text" name="cpassword" />
-      <Link className='btn btn-default-outline' to='/login'>Register</Link>
+    <form onSubmit={sendData}>
+      <input onChange={getUser} className="form-control" placeholder="Enter your Name" type="text" name="userName" />
+      <input onChange={getUser} className="form-control my-4 " placeholder="Enter your eamil" type="text" name="email" />
+      <input onChange={getUser} className="form-control my-4 " placeholder="Enter your Password" type="text" name="password" />
+      <input  onChange={getUser} className="form-control my-4 " placeholder="Enter Confirm Password" type="text" name="cpassword" />
+      <button className='btn btn-default-outline' type='submit'>Register</button>
     </form>
   </div>
 </div>
@@ -23,4 +40,4 @@ function register() {
   )
 }
 
-export default register
+export default Register
