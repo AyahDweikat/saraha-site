@@ -1,11 +1,12 @@
 import React from 'react'
 import Navbar from './component/Navbar';
-import Login from './component/Login';
-import { Route, Routes } from 'react-router-dom';
 import Home from './component/Home';
+import Login from './component/Login';
 import User from './component/User';
 import Register from './component/Register';
 import Notfound from './component/Notfound';
+import { Routes , Route} from 'react-router-dom';
+
 
 function App() {
   return (
@@ -18,7 +19,6 @@ function App() {
       <Route path='/user' element={<User/>}></Route>
       <Route path='/register' element={<Register/>}></Route>
       <Route path='*' element={<Notfound/>}></Route>
-
     </Routes>
     
     </>
