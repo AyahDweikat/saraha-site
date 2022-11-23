@@ -10,12 +10,8 @@ function Register() {
   });
   let getUser = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
-    console.log(user);
   };
-
-
   let sendData = async (e) => {
-    // console.log(user);
     e.preventDefault();
     let {data} = await axios.post("http://localhost:3000/api/v1/auth/signup",user);
     console.log(data.message);
