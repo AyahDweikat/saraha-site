@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from 'axios';
+import { motion , AnimatePresence} from "framer-motion";
+
 
 function Register() {
   let [user, setUser] = useState({
@@ -17,49 +19,52 @@ function Register() {
     console.log(data.message);
     console.log(data);
   };
+  
   return (
     <>
-      <div className="container text-center my-5">
-        <div className="user my-3">
-          <i className="fas fa-user-secret user-icon" />
-          <h4 className="login">Register</h4>
-        </div>
-        <div className="card p-5 w-50 m-auto">
+      <motion.div layout animate={{opacity:1}} initial={{opacity:0}} exit={{opacity:0}}  className="container text-center my-5">
+        <motion.div className="user my-3">
+          <motion.i style={{ y: -50 }} animate={{ y: 0 }} className="fas fa-user-secret user-icon" />
+          <motion.h4 style={{ y: -100 }} animate={{ y: 0 }} className="login">Register</motion.h4> 
+        </motion.div>
+        <motion.div transition={{layout:{duration:5}}} layout animate={{opacity:1}} initial={{opacity:0}} exit={{opacity:0}} className="card p-5 w-50 m-auto">
           <form onSubmit={sendData}>
-            <input
+            <AnimatePresence>
+            <motion.input style={{ y: -150 }} animate={{ y: 0 }}
               onChange={getUser}
               className="form-control"
               placeholder="Enter your Name"
               type="text"
               name="userName"
             />
-            <input
+            <motion.input style={{ y: -300 }} animate={{ y: 0 }}
               onChange={getUser}
               className="form-control my-4 "
               placeholder="Enter your eamil"
               type="text"
               name="email"
             />
-            <input
+            <motion.input style={{ y: -450 }} animate={{ y: 0 }}
               onChange={getUser}
               className="form-control my-4 "
               placeholder="Enter your Password"
               type="text"
               name="password"
             />
-            <input
+            <motion.input style={{ y: -600 }} animate={{ y: 0 }}
               onChange={getUser}
               className="form-control my-4 "
               placeholder="Enter Confirm Password"
               type="text"
               name="cpassword"
             />
-            <button className="btn btn-default-outline" type="submit">
+            </AnimatePresence>
+            <motion.button style={{ x: -750 }} animate={{ x: 0 }} className="btn btn-default-outline" type="submit">
               Register
-            </button>
+            </motion.button>
           </form>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   );
 }
