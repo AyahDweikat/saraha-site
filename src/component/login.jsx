@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
 function Login() {
+  const navigate = useNavigate();
   const [loginData, setLoginData]= useState({
     password:'', 
     email:''
@@ -18,6 +19,9 @@ function Login() {
     let {data} = await axios.post("http://localhost:3000/api/v1/auth/signin",loginData);
     setMessage(data.messge);
     console.log(data);
+    if(data.messge ==="plz confirm your email"){
+      navigate('/messages');
+    }
   };
   return (
     <>

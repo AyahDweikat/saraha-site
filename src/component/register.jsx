@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   let [user, setUser] = useState({
     userName: "",
     email: "",
@@ -14,8 +16,11 @@ function Register() {
   let sendData = async (e) => {
     e.preventDefault();
     let {data} = await axios.post("http://localhost:3000/api/v1/auth/signup",user);
-    console.log(data.message);
-    console.log(data);
+    // console.log(data.message);
+    if(data.message ==="done"){
+      navigate('/login');
+    }
+    // console.log(data);
   };
   return (
     <>

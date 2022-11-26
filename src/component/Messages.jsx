@@ -7,7 +7,7 @@ function Message() {
   <div className="container text-center py-5 my-5 text-center">
     <div className="card pt-5">
       <a href data-toggle="modal" data-target="#profile">
-        <img src="img/avatar.png" className="avatar " alt />
+        <img src="img/avatar.png" className="avatar " alt="" />
       </a>
       <h3 className="py-2">Ahmed Abd Al-Muti</h3>
       <button data-toggle="modal" data-target="#share" className="btn btn-default-outline share "><i className="fas fa-share-alt" />  Share Profile</button>

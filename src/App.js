@@ -6,6 +6,7 @@ import User from './component/User';
 import Register from './component/Register';
 import Notfound from './component/Notfound';
 import { Routes , Route} from 'react-router-dom';
+import Messages from './component/Messages';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Route path='/home' element={<Home/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/user' element={<User/>}></Route>
+      <Route path='/messages' element={<Messages/>}></Route>
       <Route path='/register' element={<Register/>}></Route>
       <Route path='*' element={<Notfound/>}></Route>
     </Routes>
