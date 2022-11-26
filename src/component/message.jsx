@@ -1,6 +1,6 @@
 import React from 'react'
 
-function message() {
+function Message() {
   return (
    <>
     <div>
@@ -75,4 +75,4 @@ function message() {
   )
 }
 
-export default message
+export default Message
