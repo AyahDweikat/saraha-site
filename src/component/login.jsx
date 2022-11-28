@@ -21,11 +21,11 @@ function Login({setUserData}) {
     // console.log(loginData);
     e.preventDefault();
     let {data} = await axios.post("http://localhost:3000/api/v1/auth/signin",loginData);
-    setMessage(data.messge);
-    console.log(data);
-    if(data.messge ==="plz confirm your email"){
+    setMessage(data?.messge);
+    // console.log(data.loginToken);
+    if(data.message ==="login"){
       navigate('/messages');
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.loginToken);
       // console.log(first)
       setUserData();
     }

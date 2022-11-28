@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 function Message(token) {
+  const [token_, setToken_] =  useState()
   useEffect(() => {
-    fetchQuotes();
+    // console.log(token);
+    setToken_(token);
   }, []);
-  const fetchQuotes = async () => {
+  useEffect(() => {
+    // console.log(token_);
+    fetchQuotes(token_);
+  }, [token_]);
+
+  const fetchQuotes = async (token) => {
     const res = await axios.get(`http://localhost:3000/api/v1/message/`, {
       headers: {
         authorization: `tariq__${token}`,
       },
     });
     console.log(res);
-    return res.data;
+    if(res.status===200){
+      // getMessages()
+    }
+    // getMessages()
+    // return data;
+    
   };
   // function authorization(){
   //   axios.interceptors.request.use(req => {
@@ -25,11 +37,10 @@ function Message(token) {
   //   });
   // }
   // async function getMessages(){
-  //   localhost:3000/api/v1/message/
   //   let resp = await axios.get('localhost:3000/api/v1/message/');
   //   console.log(resp);
   // }
-
+  
 
   return (
     <>

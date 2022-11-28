@@ -15,6 +15,7 @@ function App() {
   let [token, setToken] =  useState()
   function setUserData(){
     let _token = localStorage.getItem('token');
+    // console.log(_token)
     // let decoded = jwtDecode(token);
     // setLoginData(decoded);
     setToken(_token);
@@ -23,7 +24,8 @@ function App() {
     if(localStorage.getItem('token')){
       setUserData();
     }
-  }, [])
+    // console.log(token);
+  }, [token])
   return (
     <>
     <Navbar/>
