@@ -18,6 +18,8 @@ function Message(token) {
         authorization: `tariq__${token}`,
       },
     });
+
+    
     console.log(res);
     if(res.status===200){
       // getMessages()
