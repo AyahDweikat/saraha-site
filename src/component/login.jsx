@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
-function Login() {
+function Login({setUserData}) {
   const navigate = useNavigate();
   const [loginData, setLoginData]= useState({
     password:'', 
     email:''
   })
+  // useEffect(()=>{
+  //   authorization()
+  // },[])
+
   const [message, setMessage] =  useState('')
   let getLogin = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -21,10 +25,24 @@ function Login() {
     console.log(data);
     if(data.messge ==="plz confirm your email"){
       navigate('/messages');
+      localStorage.setItem('token', data.token);
+      // console.log(first)
+      setUserData();
     }
   };
+  // function authorization(){
+  //   axios.interceptors.request.use(req => {
+  //     // `req` is the Axios request config, so you can modify
+  //     // the `headers`.
+  //     req.headers.authorization = 'tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzEwOTcwYjg3ODBmMWZkYjAwMmNjZSIsImlzTG9nZ2luIjp0cnVlLCJpYXQiOjE2NjgzNTI0MTN9.LuwEs4Qk4WsNxWCcfuxfUCwDMzzaJEw1FH3osPCjQKE';
+  //     // console.log(req);
+  //     return req;
+  //   });
+  // }
+  
   return (
     <>
+    {/* console.log(object); */}
    <div className="container text-center my-5">
   <div className="user my-3">
     <i className="fas fa-user-secret user-icon" />
