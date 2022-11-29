@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 function Login({setUserData}) {
   const navigate = useNavigate();
@@ -20,14 +21,21 @@ function Login({setUserData}) {
   let sendLoginData = async (e) => {
     // console.log(loginData);
     e.preventDefault();
+    console.log(loginData);
     let {data} = await axios.post("http://localhost:3000/api/v1/auth/signin",loginData);
     setMessage(data?.messge);
     // console.log(data.loginToken);
     if(data.message ==="login"){
-      navigate('/messages');
+      // navigate('/messages');
+      navigate({
+        pathname: '/messages',
+        search: `?email=${loginData.email}`
+      });
       localStorage.setItem('token', data.loginToken);
+      // let decoded = jwtDecode(data.loginToken);
+    // console.log(decoded);
       // console.log(first)
-      setUserData();
+      // setUserData();
     }
   };
   // function authorization(){

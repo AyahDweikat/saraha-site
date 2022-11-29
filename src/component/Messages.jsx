@@ -1,49 +1,81 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-function Message(token) {
-  const [token_, setToken_] =  useState()
-  useEffect(() => {
-    // console.log(token);
-    setToken_(token);
-  }, []);
-  useEffect(() => {
-    // console.log(token_);
-    fetchQuotes(token_);
-  }, [token_]);
+import { useSearchParams } from "react-router-dom";
+import './Messages.css'
+
+function Messages({userData}) {
+  const [name, setName ] =  useState('');
+  const [id, setId] = useState('')
+  const [token, setToken] = useState("");
+  const [messages, setMessages]= useState([])
+  let [searchParams, setSearchParams] = useSearchParams();//
+  let loginEmail = searchParams.get('email');// take eamil from login
+  function getToken(){
+    let _token = localStorage.getItem('token');
+    setToken(_token);
+  }
+  useEffect(()=>{
+    getToken();
+    if(userData !==[]){
+      setName(getName);
+    }
+  },[])
+  useEffect(()=>{
+    if(localStorage.getItem('token')){
+      fetchQuotes(token);
+    }
+  }, [token])
+  const getName = ()=>{
+    if(userData !==[]){
+    //   console.log("empty")
+    // }else{
+      userData.map((item)=>{
+        if(item.email === loginEmail){
+          setName(item.userName);
+          setId(item.id);
+          return item.userName;
+        }
+      })
+    }
+  }
 
   const fetchQuotes = async (token) => {
-    const res = await axios.get(`http://localhost:3000/api/v1/message/`, {
+    const {data} = await axios.get(`http://localhost:3000/api/v1/message/`, {
       headers: {
         authorization: `tariq__${token}`,
       },
     });
+    if(data.message==='success'){
+      console.log(data.messageList);
+      setMessages(data.messageList);
+      // getUserData(token);
 
-    
-    console.log(res);
-    if(res.status===200){
-      // getMessages()
     }
-    // getMessages()
-    // return data;
-    
   };
-  // function authorization(){
-  //   axios.interceptors.request.use(req => {
-  //     // `req` is the Axios request config, so you can modify
-  //     // the `headers`.
-  //     req.headers.authorization = 'tariq__eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNzEwOTcwYjg3ODBmMWZkYjAwMmNjZSIsImlzTG9nZ2luIjp0cnVlLCJpYXQiOjE2NjgzNTI0MTN9.LuwEs4Qk4WsNxWCcfuxfUCwDMzzaJEw1FH3osPCjQKE';
-  //     console.log(req);
-  //     // getMessages();
-  //     return req;
-  //   });
-  // }
-  // async function getMessages(){
-  //   let resp = await axios.get('localhost:3000/api/v1/message/');
-  //   console.log(resp);
-  // }
-  
 
+  function deleteMsg(_id,idx){
+    console.log(idx);
+    let _messages=[...messages];
+    
+    _messages.splice(idx, 1);
+    
+    setMessages(_messages);
+    sendMessages(_id);
+  }
+  async function sendMessages(id){
+    console.log(id)
+    let data= await axios.delete(`http://localhost:3000/api/v1/message/${id}`, 
+    {
+      headers: {
+        authorization: `tariq__${token}`,
+      }, params:{
+        authorization: `tariq__${token}`,
+      }
+    }
+    );
+    console.log(data);
+  }
   return (
     <>
       <div>
@@ -52,7 +84,7 @@ function Message(token) {
             <a href="" data-toggle="modal" data-target="#profile">
               <img src="img/avatar.png" className="avatar " alt="" />
             </a>
-            <h3 className="py-2">Ahmed Abd Al-Muti</h3>
+            <h3 className="py-2">{name}</h3>
             <button
               data-toggle="modal"
               data-target="#share"
@@ -155,7 +187,18 @@ function Message(token) {
           <div className="row">
             <div className="col-md-12">
               <div className="card py-5">
-                <p>You don't have any messages... </p>
+                
+                {/* {messages? <p>You don't have any messages... </p>
+                : */}
+                {messages.map((item, idx)=>{
+                  return (
+                  <div key={idx} className="d-flex msgList">
+                    <p className="m-auto">{item.text}</p>
+                    <button className="delBtn ms-auto" onClick={()=>deleteMsg(item._id, idx)}><i className="fa-solid fa-trash "></i></button>
+                  </div>
+                  )
+                })}
+                {/* <p>You don't have any messages... </p> */}
               </div>
             </div>
           </div>
@@ -165,4 +208,4 @@ function Message(token) {
   );
 }
 
-export default Message;
+export default Messages;

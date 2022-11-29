@@ -8,33 +8,50 @@ import Notfound from './component/Notfound';
 import { Routes , Route} from 'react-router-dom';
 import Messages from './component/Messages';
 import jwtDecode from 'jwt-decode';
+import axios from 'axios';
 
 
 function App() {
   let [loginData, setLoginData] = useState(null);
-  let [token, setToken] =  useState()
-  function setUserData(){
-    let _token = localStorage.getItem('token');
-    // console.log(_token)
-    // let decoded = jwtDecode(token);
-    // setLoginData(decoded);
-    setToken(_token);
-  }
-  useEffect(()=>{
-    if(localStorage.getItem('token')){
-      setUserData();
+  let [userData, setUserData] = useState([{}]);// email& name
+  const [allUsers, setAllUsers] = useState([]);// alllll
+
+
+
+  async function getAllUsers() {
+    let { data } = await axios.get(
+      "http://localhost:3000/api/v1/auth/allusers"
+    );
+    if (data.message === "success") {
+      let obj=data.users.map((item)=>{
+        return {userName:item.userName, email: item.email, id:item._id};
+      })
+      getUserNames(obj);
+      setAllUsers(data.users);
     }
-    // console.log(token);
-  }, [token])
+  }
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+
+  function getUserNames(obj){
+    if(obj !== []){
+    setUserData(obj);
+    }
+  }
   return (
     <>
     <Navbar/>
     <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/home' element={<Home/>}></Route>
-      <Route path='/login' element={<Login setUserData={setUserData} />}></Route>
-      <Route path='/user' element={<User/>}></Route>
-      <Route path='/messages' element={<Messages token={token}/>}></Route>
+      <Route path='/login' element={<Login 
+      // setUserData={setUserData}
+       />}></Route>
+      <Route path='/user' element={<User
+      allUser={allUsers}/>}></Route>
+      <Route path='/messages' element={<Messages userData={userData} />}></Route>
       <Route path='/register' element={<Register/>}></Route>
       <Route path='*' element={<Notfound/>}></Route>
     </Routes>

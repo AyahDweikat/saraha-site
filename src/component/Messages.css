@@ -1,0 +1,39 @@
+.delBtn{
+    border:transparent;
+    color:#10BBB3;
+}
+button{
+    border:transparent !important;
+    background-color: transparent;
+}
+button i{
+    color:#fff;
+    background-color: #10BBB3;
+    padding: 10px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.msgList{
+    /* justify-content:end; */
+    width: 100%;
+    background-color: rgb(235, 229, 229);
+    /* background-color: red; */
+    padding: 15px;
+    border:1px solid #10BBB3;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin-bottom: 5px;
+}
+.msgList:hover{
+    background-color: rgb(214, 211, 211);
+}
+.msgList p{
+    padding-top: 12px;
+    text-align: center;
+}

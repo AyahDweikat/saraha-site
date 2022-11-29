@@ -1,24 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import './User.css';
-function User() {
+function User({allUser}) {
   const [allUsers, setAllUsers] = useState([]);
   const [userName, setUserName] = useState('');
   const [userData, setUserData] = useState({});
   const [message, setMessage] =  useState({text:''})
 
-  async function getAllUsers() {
-    let { data } = await axios.get(
-      "http://localhost:3000/api/v1/auth/allusers"
-    );
-    if (data.message === "success") {
-      setAllUsers(data.users);
-    }
-  }
   useEffect(() => {
-    getAllUsers();
-  }, []);
-
+    if(allUser !==[]){
+      setAllUsers(allUser);
+    }
+  }, [allUser]);
   
   function onTextChange(e){
     setUserName(e.target.value)
