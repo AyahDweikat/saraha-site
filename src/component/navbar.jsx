@@ -11,6 +11,11 @@ function Navbar() {
       Menu <span className="navbar-toggler-icon" />
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav me-auto">
+        <li className="nav-item">
+          <Link className="nav-link" to="user">Send a Message</Link>
+        </li>
+      </ul>
       <ul className="navbar-nav ms-auto">
         <li className="nav-item">
           <Link className="nav-link" to="Register">Register</Link>
@@ -18,6 +23,7 @@ function Navbar() {
         <li className="nav-item">
           <Link className="nav-link" to="Login">Login</Link>
         </li>
+        
       </ul>
     </div>
   </div>
