@@ -1,7 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 
-function Navbar() {
+function Navbar({checkLogin}) {
+
   return (
     <>
     <nav className="navbar navbar-expand-lg bg-custom navbar-dark bg-dark">
@@ -13,7 +14,8 @@ function Navbar() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="user">Send a Message</Link>
+          <Link className="nav-link" to={checkLogin? "messages" :"user"}>{checkLogin? "Messages" :"Send a Message"}</Link>
+
         </li>
       </ul>
       <ul className="navbar-nav ms-auto">
@@ -21,7 +23,7 @@ function Navbar() {
           <Link className="nav-link" to="Register">Register</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="Login">Login</Link>
+          <Link className="nav-link" to={checkLogin?"Logout" :"Login"} >{checkLogin?"Logout" :"Login"}</Link>
         </li>
         
       </ul>

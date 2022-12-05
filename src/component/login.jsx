@@ -5,7 +5,7 @@ import axios from "axios";
 import "./Login.css";
 import { motion } from "framer-motion";
 
-function Login() {
+function Login({getCheckLogin}) {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [loginData, setLoginData] = useState({
@@ -21,22 +21,14 @@ function Login() {
       "http://localhost:3000/api/v1/auth/signin",
       loginData
     );
-    console.log(data)
+    setMessage(data.messge);
     if (data.message === "login") {
-      // console.log(loginData);
-      // let { data } = await axios.get(
-      //   "http://localhost:3000/api/v1/auth/signin",
-      //   loginData
-      // );
-      // setMessage(data?.messge);
-      // console.log(data);
-      if (data.message === "login") {
-        navigate({
-          pathname: "/messages",
-          search: `?email=${loginData.email}`,
-        });
-        localStorage.setItem("token", data.loginToken);
-      }
+      navigate({
+        pathname: "/messages",
+        search: `?email=${loginData.email}`,
+      });
+      localStorage.setItem("token", data.loginToken);
+      getCheckLogin(true);
     }
   };
   function pass() {
@@ -115,7 +107,7 @@ function Login() {
                 onChange={getLogin}
               />
               <label className="" htmlFor="">
-                {setMessage !== "" ? <small>{message}</small> : null}
+                {message !== "" ? <small>{message}</small> : null}
               </label>
               <motion.input
                 style={{ y: -300 }}
@@ -129,19 +121,19 @@ function Login() {
               <motion.button
                 style={{ y: -450 }}
                 animate={{ y: 0 }}
-                className="btn btn-default-outline my-4 w-100 rounded"
+                className="btn btn-default-outline my-4 w-100 rounded btnLogin"
                 type="submit"
               >
                 Login
               </motion.button>
               <motion.p style={{ x: -150 }} animate={{ x: 0 }}>
-                <Link
+                <motion.Link
                   className="text-muted forgot btn "
                   onClick={pass}
                   to="/forgetpassword"
                 >
                   I Forgot My Password
-                </Link>
+                </motion.Link>
               </motion.p>
               <motion.Link
                 style={{ x: -500 }}

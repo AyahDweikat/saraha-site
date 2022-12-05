@@ -18,7 +18,7 @@ function Messages({userData}) {
   useEffect(()=>{
     getToken();
     if(userData !==[]){
-      setName(getName);
+      getName()
     }
   },[])
   useEffect(()=>{

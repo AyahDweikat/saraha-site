@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-
+import './Register.css'
 function Register() {
+
   const navigate = useNavigate();
+  const [existMsg, setExistMsg] = useState('');
   let [user, setUser] = useState({
     userName: "",
     email: "",
@@ -20,8 +22,14 @@ function Register() {
       "http://localhost:3000/api/v1/auth/signup",
       user
     );
-    if (data.message === "done") {
-      navigate("/login");
+    console.log(data);
+    if (data.message === "email is exist") {
+      setExistMsg("email is exist");
+    }
+    else if (data?.saveUser?.confirmEmail === false) {
+      navigate("/confirmEmail");
+      setExistMsg("");
+
     }
   };
 
@@ -52,6 +60,7 @@ function Register() {
           exit={{ opacity: 0 }}
           className="card p-5 w-50 m-auto"
         >
+          {existMsg ===""? "" :  <small>{existMsg}</small> }
           <form onSubmit={sendData}>
             <AnimatePresence>
               <motion.input
@@ -90,15 +99,11 @@ function Register() {
                 type="text"
                 name="cpassword"
               />
-              <button
-                className="btn btn-default-outline btnLogin"
-                type="submit"
-              />
             </AnimatePresence>
             <motion.button
               style={{ x: -750 }}
               animate={{ x: 0 }}
-              className="btn btn-default-outline"
+              className="btn btn-default-outline btnLogin"
               type="submit"
             >
               Register
