@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import './User.css';
 function User({allUser}) {
+  const [success, setSuccess] = useState('')
   const [allUsers, setAllUsers] = useState([]);
   const [userName, setUserName] = useState('');
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});//
   const [message, setMessage] =  useState({text:''})
 
   useEffect(() => {
@@ -20,9 +21,11 @@ function User({allUser}) {
     e.preventDefault();
     allUsers.map((item)=>{
       if(item.userName === userName){
+        
         return setUserData(item);
       }
     })
+    setUserName('');
   }
   function onTextAreaChange(e){
     setMessage({[e.target.name]: e.target.value});
@@ -30,11 +33,12 @@ function User({allUser}) {
   function onSubmitClick(e){
     e.preventDefault();
     sendMessages(userData._id);
-    // console.log(userData._id);
   }
   async function sendMessages(_id){
     let {data}= await axios.post(`http://localhost:3000/api/v1/message/${_id}`,message);
-    console.log(data.message);
+    if(data.message ==="Dnoe "){
+    setMessage({text:''})
+    }
   }
   return (
     <>
@@ -51,9 +55,10 @@ function User({allUser}) {
                   type="search"
                   placeholder="enter username"
                   onChange={onTextChange}
+                  value={userName}
                   aria-label="Search"
                 />
-                <button className="btn btn-outline-success" type="submit">
+                <button className="btn btn-success btnSearch" type="submit">
                   Search
                 </button>
               </form>
@@ -71,10 +76,11 @@ function User({allUser}) {
                   cols={10}
                   rows={9}
                   placeholder="You cannot send a Sarahah to yourself, share your profile with your friends :)"
-                  defaultValue={""}
+                  // defaultValue={""}
                   onChange={onTextAreaChange}
+                  value={message.text}
                 />
-                <button type='submit' className="btn btn-outline-info mt-3">
+                <button type='submit' className="btn btn-outline-info mt-3 btnSend">
                   <i className="far fa-paper-plane" /> Send
                 </button>
               </form>

@@ -6,3 +6,20 @@
     justify-content: center;
     text-align: center;
 }
+.form-control{
+    border:1px solid black;
+}
+.btnSearch{
+    border:1px solid #10BBB3;
+    background-color: #10BBB3;
+}
+.btnSearch:hover{
+    background-color: #0bb3aa;
+}
+.btnSend{
+    color: #10BBB3;
+}
+.btnSend:hover{
+    background-color: #0bb3aa;
+    color:#fff;
+}

@@ -7,17 +7,13 @@ import Register from './component/Register';
 import Notfound from './component/Notfound';
 import { Routes , Route} from 'react-router-dom';
 import Messages from './component/Messages';
-import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 
 
 function App() {
   let [loginData, setLoginData] = useState(null);
-  let [userData, setUserData] = useState([{}]);// email& name
+  let [userData, setUserData] = useState([{}]);// email& name& id
   const [allUsers, setAllUsers] = useState([]);// alllll
-
-
-
   async function getAllUsers() {
     let { data } = await axios.get(
       "http://localhost:3000/api/v1/auth/allusers"
@@ -33,8 +29,6 @@ function App() {
   useEffect(() => {
     getAllUsers();
   }, []);
-
-
   function getUserNames(obj){
     if(obj !== []){
     setUserData(obj);
@@ -46,16 +40,13 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}></Route>
       <Route path='/home' element={<Home/>}></Route>
-      <Route path='/login' element={<Login 
-      // setUserData={setUserData}
-       />}></Route>
+      <Route path='/login' element={<Login />}></Route>
       <Route path='/user' element={<User
       allUser={allUsers}/>}></Route>
       <Route path='/messages' element={<Messages userData={userData} />}></Route>
       <Route path='/register' element={<Register/>}></Route>
       <Route path='*' element={<Notfound/>}></Route>
     </Routes>
-    
     </>
   )
 }

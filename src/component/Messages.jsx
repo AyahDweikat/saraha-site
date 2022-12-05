@@ -28,9 +28,7 @@ function Messages({userData}) {
   }, [token])
   const getName = ()=>{
     if(userData !==[]){
-    //   console.log("empty")
-    // }else{
-      userData.map((item)=>{
+      userData.map((item)=> {
         if(item.email === loginEmail){
           setName(item.userName);
           setId(item.id);
@@ -39,7 +37,6 @@ function Messages({userData}) {
       })
     }
   }
-
   const fetchQuotes = async (token) => {
     const {data} = await axios.get(`http://localhost:3000/api/v1/message/`, {
       headers: {
@@ -47,24 +44,16 @@ function Messages({userData}) {
       },
     });
     if(data.message==='success'){
-      console.log(data.messageList);
       setMessages(data.messageList);
-      // getUserData(token);
-
     }
   };
-
   function deleteMsg(_id,idx){
-    console.log(idx);
     let _messages=[...messages];
-    
     _messages.splice(idx, 1);
-    
     setMessages(_messages);
-    sendMessages(_id);
+    delMessages(_id);
   }
-  async function sendMessages(id){
-    console.log(id)
+  async function delMessages(id){
     let data= await axios.delete(`http://localhost:3000/api/v1/message/${id}`, 
     {
       headers: {
@@ -74,7 +63,6 @@ function Messages({userData}) {
       }
     }
     );
-    console.log(data);
   }
   return (
     <>
@@ -187,9 +175,6 @@ function Messages({userData}) {
           <div className="row">
             <div className="col-md-12">
               <div className="card py-5">
-                
-                {/* {messages? <p>You don't have any messages... </p>
-                : */}
                 {messages.map((item, idx)=>{
                   return (
                   <div key={idx} className="d-flex msgList">
