@@ -70,7 +70,7 @@ function Messages({userData}) {
         <div className="container text-center py-5 my-5 text-center">
           <div className="card pt-5">
             <a href="" data-toggle="modal" data-target="#profile">
-              <img src="img/avatar.png" className="avatar " alt="" />
+              <img src="avatar.webp" className="avatar " alt="" />
             </a>
             <h3 className="py-2">{name}</h3>
             <button

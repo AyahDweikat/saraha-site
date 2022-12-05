@@ -7,7 +7,13 @@ import Register from './component/Register';
 import Notfound from './component/Notfound';
 import { Routes , Route} from 'react-router-dom';
 import Messages from './component/Messages';
+<<<<<<< HEAD
+=======
+import Forgetpassword from './component/Forgetpassword';
+//import jwtDecode from 'jwt-decode';
+>>>>>>> origin/ahmad-branch
 import axios from 'axios';
+import Changepassword from './component/Changepassword';
 
 
 function App() {
@@ -45,6 +51,8 @@ function App() {
       allUser={allUsers}/>}></Route>
       <Route path='/messages' element={<Messages userData={userData} />}></Route>
       <Route path='/register' element={<Register/>}></Route>
+      <Route path='/forgetpassword' element={<Forgetpassword/>}></Route>
+      <Route path='/changepassord' element={<Changepassword/>}></Route>
       <Route path='*' element={<Notfound/>}></Route>
     </Routes>
     </>
