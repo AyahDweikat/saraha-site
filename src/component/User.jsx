@@ -36,6 +36,7 @@ function User({allUser}) {
   }
   async function sendMessages(_id){
     let {data}= await axios.post(`http://localhost:3000/api/v1/message/${_id}`,message);
+    // console.log(data)
     if(data.message ==="Dnoe "){
     setMessage({text:''})
     }

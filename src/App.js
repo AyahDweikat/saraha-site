@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './component/Navbar';
 import Home from './component/Home';
-import Login from './component/Login';
 import User from './component/User';
-import Register from './component/Register';
 import Notfound from './component/Notfound';
 import { Routes , Route} from 'react-router-dom';
 import Messages from './component/Messages';
-<<<<<<< HEAD
-=======
 import Forgetpassword from './component/Forgetpassword';
 //import jwtDecode from 'jwt-decode';
->>>>>>> origin/ahmad-branch
 import axios from 'axios';
 import Changepassword from './component/Changepassword';
+import Login from './component/Login';
+import Register from './component/Register';
 
 
 function App() {
@@ -52,7 +49,7 @@ function App() {
       <Route path='/messages' element={<Messages userData={userData} />}></Route>
       <Route path='/register' element={<Register/>}></Route>
       <Route path='/forgetpassword' element={<Forgetpassword/>}></Route>
-      <Route path='/changepassord' element={<Changepassword/>}></Route>
+      <Route path='/changepassword' element={<Changepassword/>}></Route>
       <Route path='*' element={<Notfound/>}></Route>
     </Routes>
     </>
