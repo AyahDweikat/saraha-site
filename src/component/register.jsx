@@ -22,7 +22,7 @@ function Register() {
       "http://localhost:3000/api/v1/auth/signup",
       user
     );
-    console.log(data);
+    //console.log(data);
     if (data.message === "email is exist") {
       setExistMsg("email is exist");
     }
